@@ -49,6 +49,17 @@ public class CsFireCtrl : MonoBehaviour
                     //몬스터에 데미지 입히는 함수 호출
                     hit.collider.gameObject.SendMessage("OnDamage", _params, SendMessageOptions.DontRequireReceiver);
                 }
+                
+                if (hit.collider.tag == "BARREL")
+                {
+                    //SendMassage를 이용해 전달한 인자를 배열에 담음
+                    //모든 데이터 형식은 object의 상속을 받기 때문에,
+                    //모든 데이터 형식으로 변환이 가능
+                    object[] _params = new object[2];
+                    _params[0] = firePos.position; 
+                    _params[1] = hit.point; 
+                    hit.collider.gameObject.SendMessage("OnDamage", _params, SendMessageOptions.DontRequireReceiver);
+                }
             }
         }
     }
